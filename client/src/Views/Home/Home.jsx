@@ -1,6 +1,7 @@
 import React from "react";
 import APIHandler from "./../../api/handler";
-import Menu from "./../../Components/Menu/Menu"
+import Menu from "./../../Components/Menu/Menu";
+import QuoteCard from "./../../Components/QuoteCard/QuoteCard"
 
 class Home extends React.Component {
   state = {
@@ -21,7 +22,7 @@ class Home extends React.Component {
     return (
       <>
         <Menu/>
-        <h1>Hello</h1>
+        <QuoteCard/>
       </>
     );
   }
