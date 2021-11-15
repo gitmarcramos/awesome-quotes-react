@@ -4,6 +4,7 @@
     --background: #FFFCEC;
     --main: #444444;
     --grey: #696969;
+    --lightgrey: #BBBBBB;
     --warning: #FF3434
 }
 
@@ -63,6 +64,7 @@ img {
     font-size: clamp(1.6rem, 5vw, 1.8rem);
     font-family: 'Roboto', sans-serif;
     line-height: 140%;
+    color: var(--grey)
 }
 
 .body-bold {
@@ -138,7 +140,7 @@ img {
     font-weight: 700;
     font-size: clamp(1rem, 5vw, 1.2rem);
     line-height: 100%;
-    text-transform: uppercase;
+    // text-transform: uppercase;
 }
 
 .add-btn {

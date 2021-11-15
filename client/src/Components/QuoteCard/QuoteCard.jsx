@@ -1,18 +1,21 @@
-import {React, Component} from 'react';
-import "./QuoteCard.css"
+import { React, Component } from "react";
+import "./QuoteCard.css";
 
-export default class QuoteCard extends Component {
+import QuoteCardHeader from "./../../Components/Quotecard-header/QuoteCardHeader";
+import QuoteCardBody from "./../../Components/Quote-body/QuoteCardBody";
+import QuoteCardFooter from "./../../Components/QuoteCard-footer/QuoteCardFooter";
 
-    state={
-        quote: {},
-    }
+export default function QuoteCard (props) {
 
-    render() {
-        return(
-            <div className="main">
-                <h1>Hello QuoteCard</h1>
-            </div>
-        )
-    }
+  console.log("props=======>", props)
 
+    return (
+      <div className="main">
+        <div className="quote">
+          <QuoteCardHeader />
+          <QuoteCardBody />
+          <QuoteCardFooter />
+        </div>
+      </div>
+    )
 }

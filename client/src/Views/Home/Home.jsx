@@ -5,7 +5,7 @@ import QuoteCard from "./../../Components/QuoteCard/QuoteCard"
 
 class Home extends React.Component {
   state = {
-    quotes: "[]",
+    quotes: [],
   };
 
   async componentDidMount() {
@@ -18,11 +18,14 @@ class Home extends React.Component {
   }
 
   render() {
-      console.log(this.state.quotes)
     return (
       <>
         <Menu/>
-        <QuoteCard/>
+        <div>
+        {this.state.quotes.map((quote, i)=>{
+              return <QuoteCard key={i} data={quote}/>
+          })}
+        </div>
       </>
     );
   }
