@@ -5,24 +5,26 @@ const userModel = require("./../models/Users.model");
 const protectAuthRoute = require("./../middlewares/protectAuthRoute");
 const fileUploader = require('./../config/cloudinary');
 
+//! PUT BACK PROTECT ROUTE MIDDLEWARE
 
+// todo REACT 
+// router.get("/login", function (req, res, next) {
+//   // res.render("auth/login");
+// });
 
-// GET login page
-router.get("/login", protectAuthRoute, function (req, res, next) {
-  res.render("auth/login");
-});
-
+// todo REACT 
 // GET logout
-router.get("/logout", async (req, res, next) => {
-  req.session.destroy(function (err) {
-    res.redirect("/auth/login");
-  });
-});
+// router.get("/logout", async (req, res, next) => {
+//   req.session.destroy(function (err) {
+//     res.redirect("/auth/login");
+//   });
+// });
 
+// todo REACT 
 // GET auth page
-router.get("/", function (req, res, next) {
-  res.redirect("/auth/login");
-});
+// router.get("/", function (req, res, next) {
+//   res.redirect("/auth/login");
+// });
 
 
 // POST login page
@@ -51,11 +53,11 @@ router.post("/login", protectAuthRoute, async function (req, res, next) {
   }
 });
 
-
+// todo REACT 
 //GET create-account page
-router.get("/create-account", protectAuthRoute, function (req, res, next) {
-  res.render("auth/create-account");
-});
+// router.get("/create-account", protectAuthRoute, function (req, res, next) {
+//   res.render("auth/create-account");
+// });
 
 
 // POST create-account page
@@ -92,12 +94,5 @@ router.post("/create-account", protectAuthRoute, fileUploader.single('profilePic
     res.redirect("/auth/create-account");
   }
 });
-
-
-
-
-
-
-
 
 module.exports = router;

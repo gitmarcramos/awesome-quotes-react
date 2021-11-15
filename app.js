@@ -5,6 +5,7 @@ const createError = require("http-errors");
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -19,8 +20,10 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.use(express.static("public"));
+
 hbs.registerPartials(__dirname + "/views/partials");
 require("./helpers/hbs.js");
+
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -41,6 +44,15 @@ app.use(
   })
 );
 
+const corsOptions = {
+  origin: [process.env.CLIENT_URL],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+
+
 app.use(flash());
 
 app.use(require("./middlewares/exposeLoginStatus"));
@@ -52,11 +64,11 @@ const authRouter = require("./routes/auth.routes");
 const filterRouter = require("./routes/filter.routes");
 const quoteRouter = require("./routes/quotes.routes")
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/auth", authRouter);
-app.use("/filter", filterRouter);
-app.use("/quotes", quoteRouter)
+app.use("/api", indexRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/filter", filterRouter);
+app.use("/api/quotes", quoteRouter)
 
 
 // To handle

@@ -4,15 +4,24 @@ const quoteModel = require("./../models/Quotes.model");
 const userModel = require("./../models/Users.model");
 const protectUserRoute = require("./../middlewares/protectUserRoute");
 
-// GET Create quote
-router.get("/create-quote", protectUserRoute, (req, res, next) => {
-  res.render("partials/quote_create", {
-    script: ["add-person.js", "format-date.js"],
-    css: ["quote-create.css"],
-  });
-});
 
-router.post("/create-quote", protectUserRoute, async (req, res, next) => {
+//! DO NOT FORGET TO PUT BACK THE PROTECT ROUTE MIDDLEWARE
+
+
+//todo REACT route
+// GET Create quote
+// router.get("/create-quote", (req, res, next) => {
+//   // res.render("partials/quote_create", {
+//   //   script: ["add-person.js", "format-date.js"],
+//   //   css: ["quote-create.css"],
+//   // });
+
+
+//   res.status(200).send("GET ROUTE for create quote");
+// });
+
+/* ----------------------- // POST Route create-quote ----------------------- */
+router.post("/create-quote", async (req, res, next) => {
   try {
     const userDebug = await userModel.find({ name: "Paul" });
     const { user, text } = req.body;
@@ -30,17 +39,18 @@ router.post("/create-quote", protectUserRoute, async (req, res, next) => {
       ...req.body,
       dateCreatedAt: new Date(Date.now()),
       quotes: quotes,
-      publisher: req.session.currentUser._id
+      publisher: req.session.currentUser._id,
     };
     console.log(quotes);
     await quoteModel.create(newQuote);
-    res.redirect("/home");
+    res.status(200).json(newQuote);
   } catch (err) {
     console.error(err);
     res.redirect("/quotes/create-quote");
   }
 });
 
+// GET quote ID
 router.get("/:id([a-z0-9]{24})", async (req, res, next) => {
   try {
     const quote = await quoteModel
@@ -48,17 +58,13 @@ router.get("/:id([a-z0-9]{24})", async (req, res, next) => {
       .populate("publisher");
     const listQuotes = [];
     listQuotes.push(quote);
-    res.render("home", {
-      listQuotes,
-      script: ["format-date.js"],
-      css: ["quote-card.css"],
-    });
+    res.status(200).json(quote);
   } catch {
     res.redirect("/home");
   }
 });
 
-router.post("/:id/like", protectUserRoute, async (req, res, next) => {
+router.post("/:id/like", async (req, res, next) => {
   try {
     const user = await userModel.findById(req.session.currentUser._id);
     const quote = await quoteModel.findById(req.params.id);

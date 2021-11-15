@@ -1,14 +1,24 @@
-import { useState } from 'react'
-import './App.css'
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Home from "./Views/Home/Home";
+import "./styles/mainStyle.css";
+import Loader from "./Components/Loader/Loader";
 
-function App() {
-  const [count, setCount] = useState(0)
+class App extends React.Component {
+  state = {
+    quotes: [],
+  };
 
-  return (
-    <div className="App">
-     
-    </div>
-  )
+  render() {
+    return (
+      <div className="main">
+        <Switch>
+          <Route exact path="/" component={Loader}/>
+          <Route path="/home" component={Home} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default App
+export default App;

@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const quoteModel = require("./../models/Quotes.model");
 
-/* GET index page. */
-router.get("/", function (req, res, next) {
-  res.render("index", {
-    script: ["index-time.js"],
-  });
-});
 
-// GET home page
+//todo REACT 
+/* GET index page. */
+// router.get("/", function (req, res, next) {
+//   res.status(200)
+// });
+
+/* ---------------------------- // GET home page ---------------------------- */
 router.get("/home", async function (req, res, next) {
   try {
     const listQuotes = await quoteModel
@@ -17,25 +17,25 @@ router.get("/home", async function (req, res, next) {
       .sort({ dateCreatedAt: -1 })
       .populate("publisher");
 
-    res.render("home", {
-      listQuotes,
-      script: ["animation.js", "format-date.js"],
-      css: ["quote-card.css"],
-    });
+    res.status(200).json(listQuotes);
   } catch (err) {
     console.error(err);
   }
 });
 
-router.get("/filter", function (req, res, next) {
-  res.render("filter", {
-    script: ["format-date.js"]
-  });
-});
 
+// todo React Routing
+// router.get("/filter", function (req, res, next) {
+//   res.status(200)
+// });
+
+
+
+
+// todo React Routing
 //GET About Page
-router.get("/about", function (req, res, next) {
-  res.render("about");
-});
+// router.get("/about", function (req, res, next) {
+//   res.status(200)
+// });
 
 module.exports = router;
